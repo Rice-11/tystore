@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Radio+Canada:ital,wght@0,300..700;1,300..700&display=swap');
+
+body, input, button, textarea, select {
+    font: 26px 'Radio Canada', sans-serif;
+    font-weight: 500;
+}
+
+footer{
+    height:40vh; /*Adapting the element based on the viewport*/
+  }
+
+.container {
+    height:40vh; /*Adapting the element based on the viewport*/
+    background-color: rgba(0, 97, 175, 0.52);
+    border-radius: 28px;
+    margin-left: 15vh;
+    margin-right: 15vh;
+    margin-bottom: 4vh;
+    padding-top: 2vh;
+}
+  
