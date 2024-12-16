@@ -21,8 +21,7 @@
         <section>
             <p> THIS IS A LONG AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHHHHHHHHHHH</p>
         </section>
-
-        <a href="login.php"> does to the login page</a>
+        <a href="login.php">does to the login page</a>
     </body>
 
     <footer>
