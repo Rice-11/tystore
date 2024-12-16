@@ -3,27 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>This is a title</title>
+    <title>Superlatyf</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body>
-    <head>This is an assigment</head>
+<header>
+    <?php include("header.php"); ?>
+</header>
 
-    <section>
-        <p> THIS IS A LONG AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHHHHHHHHHHH</p>
-    </section>
-    <section>
-        <p> THIS IS A LONG AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHHHHHHHHHHH</p>
-    </section>
-    <section>
-        <p> THIS IS A LONG AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHHHHHHHHHHH</p>
-    </section>
-</body>
+    <body>
+        <section>
+            <p> THIS IS A LONG AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHHHHHHHHHHH</p>
+        </section>
+        <section>
+            <p> THIS IS A LONG AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHHHHHHHHHHH</p>
+        </section>
+        <section>
+            <p> THIS IS A LONG AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHHHHHHHHHHH</p>
+        </section>
 
-<footer>
-    <?php 
-    include("foot.php"); ?>
+        <a href="login.php"> does to the login page</a>
+    </body>
 
-</footer>
+    <footer>
+        <?php include("foot.php"); ?>
+    </footer>
+
 </html>

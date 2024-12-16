@@ -5,17 +5,114 @@ body, input, button, textarea, select {
     font-weight: 500;
 }
 
+h1 {
+    font-size: 2.5rem; /* 40px if base is 16px */
+}
+
+h2 {
+    font-size: 2rem; /* 32px if base is 16px */
+}
+
+h3 {
+    font-size: 1.75rem; /* 28px if base is 16px */
+}
+
+h4 {
+    font-size: 1.5rem; /* 24px if base is 16px */
+}
+
+h5 {
+    font-size: 1.25rem; /* 20px if base is 16px */
+}
+
+h6 {
+    font-size: 1rem; /* 16px if base is 16px */
+}
+
+p {
+    font-size: 1em; 
+    line-height: 1.6; /* Improves readability */
+}
+
 footer{
-    height:40vh; /*Adapting the element based on the viewport*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
 .container {
-    height:40vh; /*Adapting the element based on the viewport*/
-    background-color: rgba(0, 97, 175, 0.52);
-    border-radius: 28px;
-    margin-left: 15vh;
-    margin-right: 15vh;
-    margin-bottom: 4vh;
-    padding-top: 2vh;
+    height:50vh; /*Adapting the element based on the viewport*/
+    width: 188vh;
+    margin: 2vh;
+    display: flex;
+    padding: 1em;
+    gap: 1em;
 }
-  
+
+.col-right {
+    flex: 2;
+}
+
+.col-left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1em; /* Add some space between rows */
+}
+
+.row {
+    display: flex;
+    border: 2px solid #464545;
+    border-radius: 1.5em;
+    padding-left: 1em;
+}
+
+.row2 {
+    display: flex;
+    border: 2px solid #464545;
+    border-radius: 1.5em;
+    height: 14.8em;
+}
+
+.footer-links{
+    padding-left: 1.5em;
+    width: 33%;
+}
+
+.col-left .row:first-child {
+    flex: 1;
+    grid-template-areas:
+        "logo" "emtext" "emtext"
+        "logo" "emtext" "emtext";
+}
+
+.col-left .row:last-child {
+    flex: 3;
+}
+
+.logo{
+    align-items: center;
+    display: flex;
+}
+
+.emtext{
+    display: grid;
+    padding: 12px;
+    padding-left: 28px;
+    gap: 6px;
+}
+
+input{
+    width: 11.5em;
+    height: 1.2em;
+    background: lightgray;
+    border-radius: 12px;
+    border: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-progress-appearance: none;
+    appearance: none;
+    padding: 4px;
+    padding-left: 14px;
+    outline: none;
+}
