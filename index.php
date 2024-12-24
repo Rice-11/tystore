@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Superlatyf</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="astyle.css">
 </head>
 
 <header>
@@ -13,7 +13,7 @@
 
     <body>
         <section>
-            <p> THIS IS A LONG AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHHHHHHHHHHH</p>
+            <p> THIS IS A LONG AAAAAAAACCCCCCCCCCCCCBBBBBBBBBBBBBBBBAAAAAHHHHHHHHHHHHHHHHHHHHHHHHHH</p>
         </section>
         <section>
             <p> THIS IS A LONG AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHHHHHHHHHHH</p>
