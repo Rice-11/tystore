@@ -1,3 +1,45 @@
+<?php
+include("config.php");
+
+if(isset($_POST["submit"])){
+    $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
+    $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+    $age = filter_input(INPUT_POST, 'age', FILTER_SANITIZE_NUMBER_INT);
+    $password = $_POST['password'];
+    
+    // Email validation
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        echo "<div class='message'><p>Invalid email format!</p></div>";
+        exit();
+    }
+
+    // Check if email already exists
+    $verify_query = mysqli_query($con, "SELECT email FROM users WHERE email='$email'");
+    
+    if(mysqli_num_rows($verify_query) != 0) {
+        echo "<div class='message'><p>This email is already registered!</p></div>";
+    } else {
+        // Insert new user into database
+        $insert_query = "INSERT INTO users (username, email, age, password, has_2fa, role) VALUES (?, ?, ?, ?, 0, 'user')";
+        $stmt = mysqli_prepare($con, $insert_query);
+        mysqli_stmt_bind_param($stmt, "ssis", $username, $email, $age, $password);
+        
+        if(mysqli_stmt_execute($stmt)) {
+            echo "<div class='message' style='color: green;'><p>Registration successful!</p></div>";
+            // Redirect to login page after 2 seconds
+            echo "<script>
+                    setTimeout(function() {
+                        window.location.href = 'login.php';
+                    }, 2000);
+                  </script>";
+        } else {
+            echo "<div class='message'><p>Error: " . mysqli_error($con) . "</p></div>";
+        }
+        mysqli_stmt_close($stmt);
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,73 +49,40 @@
     <link rel="stylesheet" href="alogin.css">
     <title>Register</title>
     <style>
-        .password-strength {
+        .password-requirements {
             margin-top: 5px;
             font-size: 0.9em;
         }
-        .weak { color: red; }
-        .medium { color: orange; }
-        .strong { color: green; }
+        .requirement {
+            color: #666;
+            display: block; /* Initially visible */
+        }
+        .requirement.hidden {
+            display: none; /* Hide when requirement is met */
+        }
+        .error-message {
+            color: #ff3333;
+            margin-top: 5px;
+            font-size: 0.9em;
+        }
+        .password-toggle {
+            position: relative;
+        }
+        .password-toggle button {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            border: none;
+            background: none;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="box form-box">
             <header>Register</header>
-            <?php
-                include("config.php");
-                if(isset($_POST["submit"])){
-                    $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
-                    $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
-                    $age = filter_input(INPUT_POST, 'age', FILTER_SANITIZE_NUMBER_INT);
-                    $password = $_POST['password'];
-
-                    // Email validation
-                    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                        echo "<div class='message'><p>Invalid email format!</p></div><br>";
-                        echo "<a href='javascript:self.history.back()'><button class='btn'>Go Back</button>";
-                        exit();
-                    }
-
-                    // Password strength check
-                    if (strlen($password) < 8) {
-                        echo "<div class='message'><p>Password must be at least 8 characters long!</p></div><br>";
-                        echo "<a href='javascript:self.history.back()'><button class='btn'>Go Back</button>";
-                        exit();
-                    }
-
-                    if (!preg_match("/[A-Z]/", $password)) {
-                        echo "<div class='message'><p>Password must contain at least one uppercase letter!</p></div><br>";
-                        echo "<a href='javascript:self.history.back()'><button class='btn'>Go Back</button>";
-                        exit();
-                    }
-
-                    if (!preg_match("/[0-9]/", $password)) {
-                        echo "<div class='message'><p>Password must contain at least one number!</p></div><br>";
-                        echo "<a href='javascript:self.history.back()'><button class='btn'>Go Back</button>";
-                        exit();
-                    }
-
-                    $verify_query = mysqli_query($con,"SELECT email FROM users WHERE email='$email'");
-
-                    if(mysqli_num_rows($verify_query) !=0 ){
-                        echo "<div class='message'>
-                                  <p>This email is already registered!</p>
-                              </div> <br>";
-                        echo "<a href='javascript:self.history.back()'><button class='btn'>Go Back</button>";
-                    }
-                    else{
-                        mysqli_query($con,"INSERT INTO users(username, email, age, password, has_2fa, role) VALUES('$username','$email','$age','$password', 0, 'user')") or die("Error inserting data");
-            
-                        echo "<div class='message'>
-                                  <p>Registration successful!</p>
-                              </div> <br>";
-                        echo "<a href='login.php'><button class='btn'>Login Now</button>";
-                    }  
-                } else {
-            ?>
-
-            <form action="" method="post" id="registerForm">
+            <form action="" method="post" id="registerForm" onsubmit="return validateForm()">
                 <div class="field input">
                     <label for="username">Username</label>
                     <input type="text" name="username" id="username" autocomplete="off" required>
@@ -82,7 +91,7 @@
                 <div class="field input">
                     <label for="email">Email</label>
                     <input type="text" name="email" id="email" autocomplete="off" required>
-                    <div id="emailMessage"></div>
+                    <div class="error-message" id="emailMessage"></div>
                 </div>
 
                 <div class="field input">
@@ -90,14 +99,22 @@
                     <input type="number" name="age" id="age" autocomplete="off" required>
                 </div>
 
-                <div class="field input">
+                <div class="field input password-toggle">
                     <label for="password">Password</label>
                     <input type="password" name="password" id="password" autocomplete="off" required>
-                    <div class="password-strength" id="passwordStrength"></div>
+                    <button type="button" id="togglePassword" onclick="togglePasswordVisibility()">
+                        👁️
+                    </button>
+                    <div class="password-requirements">
+                        <div id="length" class="requirement">8 characters</div>
+                        <div id="uppercase" class="requirement">At least one uppercase letter</div>
+                        <div id="number" class="requirement">At least one number</div>
+                        <div id="special" class="requirement">At least one special character</div>
+                    </div>
                 </div>
 
                 <div class="field">
-                    <input type="submit" class="btn" name="submit" value="Register" required>
+                    <input type="submit" class="btn" name="submit" value="Register" id="submitBtn" required>
                 </div>
                 <div class="links">
                     Already a member? <a href="login.php">Sign In</a>
@@ -105,50 +122,70 @@
             </form>
 
             <script>
-                // Real-time password strength checker
+                function togglePasswordVisibility() {
+                    const passwordInput = document.getElementById('password');
+                    const toggleButton = document.getElementById('togglePassword');
+                    
+                    if (passwordInput.type === 'password') {
+                        passwordInput.type = 'text';
+                        toggleButton.textContent = '🔒';
+                    } else {
+                        passwordInput.type = 'password';
+                        toggleButton.textContent = '👁️';
+                    }
+                }
+
                 document.getElementById('password').addEventListener('input', function() {
                     const password = this.value;
-                    const strengthDiv = document.getElementById('passwordStrength');
-                    let strength = 0;
-                    let message = '';
-
-                    if (password.length >= 8) strength++;
-                    if (password.match(/[A-Z]/)) strength++;
-                    if (password.match(/[0-9]/)) strength++;
-                    if (password.match(/[^A-Za-z0-9]/)) strength++;
-
-                    switch(strength) {
-                        case 0:
-                        case 1:
-                            message = '<span class="weak">Weak password</span>';
-                            break;
-                        case 2:
-                        case 3:
-                            message = '<span class="medium">Medium password</span>';
-                            break;
-                        case 4:
-                            message = '<span class="strong">Strong password</span>';
-                            break;
-                    }
-
-                    strengthDiv.innerHTML = message;
+                    
+                    // Check each requirement and hide if met
+                    document.getElementById('length').className = 
+                        'requirement ' + (password.length >= 8 ? 'hidden' : '');
+                    document.getElementById('uppercase').className = 
+                        'requirement ' + (/[A-Z]/.test(password) ? 'hidden' : '');
+                    document.getElementById('number').className = 
+                        'requirement ' + (/[0-9]/.test(password) ? 'hidden' : '');
+                    document.getElementById('special').className = 
+                        'requirement ' + (/[^A-Za-z0-9]/.test(password) ? 'hidden' : '');
                 });
 
-                // Real-time email format checker
                 document.getElementById('email').addEventListener('input', function() {
                     const email = this.value;
                     const messageDiv = document.getElementById('emailMessage');
                     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
                     if (!emailRegex.test(email)) {
-                        messageDiv.innerHTML = '<span class="weak">Invalid email format</span>';
+                        messageDiv.textContent = 'Please enter a valid email address';
+                        messageDiv.style.color = '#ff3333';
                     } else {
-                        messageDiv.innerHTML = '<span class="strong">Valid email format</span>';
+                        messageDiv.textContent = '';
                     }
                 });
+
+                function validateForm() {
+                    const password = document.getElementById('password').value;
+                    const email = document.getElementById('email').value;
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+                    // Check all password requirements
+                    if (password.length < 8 || 
+                        !/[A-Z]/.test(password) || 
+                        !/[0-9]/.test(password) || 
+                        !/[^A-Za-z0-9]/.test(password)) {
+                        alert('Please meet all password requirements');
+                        return false;
+                    }
+
+                    // Check email format
+                    if (!emailRegex.test(email)) {
+                        alert('Please enter a valid email address');
+                        return false;
+                    }
+
+                    return true;
+                }
             </script>
         </div>
-        <?php } ?>
     </div>
 </body>
 </html>
