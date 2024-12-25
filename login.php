@@ -22,7 +22,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="alogin.css">
+    <link rel="stylesheet" href="css/alogin.css">
     <title>Login Page</title>
     <style>
         .error-message {
@@ -36,6 +36,7 @@
         .password-toggle button {
             position: absolute;
             right: 12px;
+            bottom: 22px;
             top: 50%;
             border: none;
             background: none;

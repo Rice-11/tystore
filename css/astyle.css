@@ -1,39 +1,71 @@
+/* Import font - only import once */
 @import url('https://fonts.googleapis.com/css2?family=Radio+Canada:ital,wght@0,300..700;1,300..700&display=swap');
 
-body, input, button, textarea, select {
-    font: 26px 'Radio Canada', sans-serif;
+/* Reset and base styles */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font: 21px 'Radio Canada', sans-serif;
     font-weight: 500;
 }
 
-h1 {
-    font-size: 2.5rem; /* 40px if base is 16px */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
-h2 {
-    font-size: 2rem; /* 32px if base is 16px */
+main {
+    flex: 1;
+    padding: 20px;
+    margin-top: 60px; /* Space for fixed header */
 }
 
-h3 {
-    font-size: 1.75rem; /* 28px if base is 16px */
-}
-
-h4 {
-    font-size: 1.5rem; /* 24px if base is 16px */
-}
-
-h5 {
-    font-size: 1.25rem; /* 20px if base is 16px */
-}
-
-h6 {
-    font-size: 1rem; /* 16px if base is 16px */
-}
+/* Typography */
+h1 { font-size: 2rem; }
+h2 { font-size: 1.75rem; }
+h3 { font-size: 1.5rem; }
+h4 { font-size: 1.5rem; }
+h5 { font-size: 1.25rem; }
+h6 { font-size: 1rem; }
 
 p {
-    font-size: 1em; 
-    line-height: 1.6; /* Improves readability */
+    font-size: 1em;
+    line-height: 1.6;
 }
 
+/* Header styles */
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    background-color: aqua;
+    padding: 0 20px;
+    box-sizing: border-box;
+    z-index: 1000;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+section {
+    height: 20em;
+    align-items: center;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+}
+
+/* Footer styles */
 footer{
     display: flex;
     align-items: center;
@@ -41,7 +73,7 @@ footer{
   }
 
 .container {
-    height:50vh; /*Adapting the element based on the viewport*/
+    height:50h; /*Adapting the element based on the viewport*/
     width: 188vh;
     margin: 2vh;
     display: flex;
