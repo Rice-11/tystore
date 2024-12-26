@@ -19,7 +19,7 @@
         <section>
             <p>THIS IS A LONG AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHHHHHHHHHHH</p>
         </section>
-        <a href="login.php">does to the login page</a>
+        <a href="profile.php">does to the login page</a>
     </main>
 
     <?php include("foot.php"); ?>
