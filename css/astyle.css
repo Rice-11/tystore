@@ -66,14 +66,15 @@ section {
 }
 
 /* Footer styles */
-footer{
+footer {
     display: flex;
     align-items: center;
     justify-content: center;
-  }
+}
 
+/* Container styles */
 .container {
-    height:50h; /*Adapting the element based on the viewport*/
+    height: 50vh;
     width: 188vh;
     margin: 2vh;
     display: flex;
@@ -81,6 +82,7 @@ footer{
     gap: 1em;
 }
 
+/* Column styles */
 .col-right {
     flex: 2;
 }
@@ -89,9 +91,10 @@ footer{
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 1em; /* Add some space between rows */
+    gap: 1em;
 }
 
+/* Row styles */
 .row {
     display: flex;
     border: 2px solid #464545;
@@ -106,45 +109,202 @@ footer{
     height: 14.8em;
 }
 
-.footer-links{
+/* Footer links */
+.footer-links {
     padding-left: 1.5em;
     width: 33%;
 }
 
-.col-left .row:first-child {
-    flex: 1;
-    grid-template-areas:
-        "logo" "emtext" "emtext"
-        "logo" "emtext" "emtext";
-}
-
-.col-left .row:last-child {
-    flex: 3;
-}
-
-.logo{
-    align-items: center;
-    display: flex;
-}
-
-.emtext{
+/* Profile specific styles */
+.profile-container {
+    max-width: 1200px;
+    margin: 80px auto 20px; /* Adjusted for fixed header */
+    padding: 0 20px;
     display: grid;
-    padding: 12px;
-    padding-left: 28px;
-    gap: 6px;
+    grid-template-columns: 300px 1fr;
+    gap: 30px;
 }
 
-input{
-    width: 11.5em;
-    height: 1.2em;
+.profile-sidebar {
+    background: white;
+    border: 2px solid #464545;
+    border-radius: 1.5em;
+    padding: 30px;
+}
+
+.profile-main {
+    background: white;
+    border: 2px solid #464545;
+    border-radius: 1.5em;
+    padding: 30px;
+}
+
+.profile-picture {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    position: relative;
+    cursor: pointer;
+    background: lightgray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.profile-picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-picture:hover::after {
+    content: 'Change Photo';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,0.7);
+    color: white;
+    padding: 8px;
+    font-size: 14px;
+}
+
+.profile-info {
+    text-align: left;
+}
+
+.welcome-text {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.user-email {
+    color: #666;
+    font-size: 1rem;
+    margin-bottom: 15px;
+}
+
+.join-date {
+    font-size: 0.9rem;
+    color: #888;
+    margin-bottom: 30px;
+}
+
+/* Settings sections */
+.settings-section {
+    margin-bottom: 30px;
+    padding-bottom: 30px;
+    border-bottom: 2px solid #464545;
+}
+
+.settings-section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.section-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Form elements */
+.field {
+    margin-bottom: 20px;
+}
+
+.field input {
+    width: 100%;
+    height: 2.5em;
     background: lightgray;
     border-radius: 12px;
     border: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    -ms-progress-appearance: none;
-    appearance: none;
-    padding: 4px;
-    padding-left: 14px;
+    padding: 4px 14px;
     outline: none;
+    font-size: 1rem;
+    font-family: 'Radio Canada', sans-serif;
+}
+
+.btn {
+    background-color: aqua;
+    color: black;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-family: 'Radio Canada', sans-serif;
+}
+
+.btn:hover {
+    background-color: rgb(0, 225, 255);
+}
+
+/* Toggle switch */
+.toggle-switch {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+}
+
+.toggle-btn {
+    position: relative;
+    display: inline-block;
+    width: 52px;
+    height: 26px;
+}
+
+.toggle-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: lightgray;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.toggle-slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .toggle-slider {
+    background-color: aqua;
+}
+
+input:checked + .toggle-slider:before {
+    transform: translateX(26px);
+}
+
+/* Messages */
+.success-message {
+    color: #4CAF50;
+    padding: 10px;
+    margin: 10px 0;
+    background: #E8F5E9;
+    border-radius: 12px;
+}
+
+.error-message {
+    color: #F44336;
+    padding: 10px;
+    margin: 10px 0;
+    background: #FFEBEE;
+    border-radius: 12px;
 }

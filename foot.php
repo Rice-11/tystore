@@ -1,12 +1,15 @@
 <footer>
-    <div class="container">
+    <div class="foot">
         <div class="col-left">
             <div class="row">
                 <div class="logo">
                     <img src="images/logo.svg" alt="company_logo" width="70" height="70">
                 </div>
-                <div class="emtext">Work with us?
-                    <input type="text" placeholder="Email">
+                <div class="emtext">
+                    Work with us?
+                    <form>
+                        <input type="email" placeholder="Email" name="email">
+                    </form>
                 </div>
             </div>
             <div class="row">

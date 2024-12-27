@@ -1,0 +1,110 @@
+footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(to bottom, #e4e9f7, black); /* Gradient background */
+  }
+  
+  .foot {
+    height: 50vh;
+    width: 188vh;
+    margin: 2vh;
+    display: flex;
+    padding: 1em;
+    gap: 1em;
+  }
+  
+  .col-right {
+    flex: 2;
+  }
+  
+  .col-left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+  }
+  
+  .row {
+    display: flex;
+    border: 2px solid #464545;
+    border-radius: 1.5em;
+    padding-left: 1em;
+  }
+  
+  .row2 {
+    display: flex;
+    border: 4px solid #464545;
+    border-radius: 1.5em;
+    height: 14.8em;
+  }
+  
+  .footer-links {
+    padding-left: 1.5em;
+    width: 33%;
+  }
+  
+  .col-left .row:first-child {
+    flex: 1;
+    /* Removing the grid template as the layout does not seem necessary */
+  }
+  
+  .col-left .row:last-child {
+    flex: 3;
+  }
+  
+  .logo {
+    align-items: center;
+    display: flex;
+  }
+  
+  .emtext {
+    display: grid;
+    padding: 16px;
+    padding-left: 28px;
+    gap: 6px;
+  }
+  
+  /* Row styles */
+  .row {
+    display: flex;
+    background-color:  #464545;
+    border-radius: 1.5em;
+    padding-left: 1em;
+    font-size: 1.25em;
+    font-weight: 700;
+    color: white;
+    border: 0px;
+    box-shadow: 2.5px 1.5px 5px 2.5px rgba(255,255,255,0.30) inset;
+  }
+  
+  .row2 {
+    display: flex;
+    background-color:  #464545;;
+    border-radius: 1.5em;
+    padding: 14px;
+    height: 100%;
+    color: white;
+    border: 0px;
+    box-shadow: 2.5px 1.5px 5px 2.5px rgba(255,255,255,0.30) inset;
+  }
+  
+  .emtext form {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  
+  .emtext input[type="email"] {
+    padding: 6px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    flex: 1;
+  }
+  
+  .emtext input[type="email"]:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+  }
