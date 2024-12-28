@@ -3,7 +3,7 @@
         <div class="col-left">
             <div class="row">
                 <div class="logo">
-                    <img src="images/logo.svg" alt="company_logo" width="70" height="70">
+                    <img src="images/logo_white.svg" alt="company_logo" width="70" height="70">
                 </div>
                 <div class="emtext">
                     Work with us?
@@ -13,7 +13,7 @@
                 </div>
             </div>
             <div class="row">
-                <p>Diddy Toystore - To identify</p>
+                <div class="social"> Diddy Toystore - To identify </div>
             </div>
         </div>
         <div class="col-right">

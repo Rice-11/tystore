@@ -21,7 +21,7 @@
         <section>
             <p>THIS IS A LONG AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHHHHHHHHHHH</p>
         </section>
-        <a href="profile.php">does to the login page</a>
+        <a href="account/profile.php">does to the login page</a>
     </main>
 
     <?php include("foot.php"); ?>

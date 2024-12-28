@@ -1,5 +1,5 @@
 <?php
-include("config.php");
+include("../config.php");
 
 if(isset($_POST["submit"])){
     $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
@@ -13,13 +13,13 @@ if(isset($_POST["submit"])){
         exit();
     }
 
-    // Check if email already exists
+    // Check if email already exists in database
     $verify_query = mysqli_query($con, "SELECT email FROM users WHERE email='$email'");
     
     if(mysqli_num_rows($verify_query) != 0) {
         echo "<div class='message'><p>This email is already registered!</p></div>";
     } else {
-        // Insert new user into database
+        // Insert new user into database if no dupe
         $insert_query = "INSERT INTO users (username, email, age, password, has_2fa, role) VALUES (?, ?, ?, ?, 0, 'user')";
         $stmt = mysqli_prepare($con, $insert_query);
         mysqli_stmt_bind_param($stmt, "ssis", $username, $email, $age, $password);
@@ -29,7 +29,7 @@ if(isset($_POST["submit"])){
             // Redirect to login page after 2 seconds
             echo "<script>
                     setTimeout(function() {
-                        window.location.href = 'login.php';
+                        window.location.href = '../account/login.php';
                     }, 2000);
                   </script>";
         } else {
@@ -46,7 +46,7 @@ if(isset($_POST["submit"])){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/alogin.css">
+    <link rel="stylesheet" href="../css/alogin.css">
     <title>Register</title>
     <style>
         .password-requirements {
@@ -54,11 +54,11 @@ if(isset($_POST["submit"])){
             font-size: 0.9em;
         }
         .requirement {
-            color: #666;
-            display: block; /* Initially visible */
+            color: #667;
+            display: block; 
         }
         .requirement.hidden {
-            display: none; /* Hide when requirement is met */
+            display: none;
         }
         .error-message {
             color: #ff3333;
@@ -118,7 +118,7 @@ if(isset($_POST["submit"])){
                     <input type="submit" class="btn" name="submit" value="Register" id="submitBtn" required>
                 </div>
                 <div class="links">
-                    Already a member? <a href="login.php">Sign In</a>
+                    Already a member? <a href="../account/login.php">Sign In</a>
                 </div>
             </form>
 
@@ -168,7 +168,7 @@ if(isset($_POST["submit"])){
                     const email = document.getElementById('email').value;
                     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-                    // Check all password requirements
+                    // Check password
                     if (password.length < 8 || 
                         !/[A-Z]/.test(password) || 
                         !/[0-9]/.test(password) || 

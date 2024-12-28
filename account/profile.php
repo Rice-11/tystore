@@ -1,14 +1,14 @@
 <?php
 session_start();
-require_once 'config.php';
+require_once '../config.php';
 
-// Check if user is logged in
+// Check for valid session if not it goes to login page
 if (!isset($_SESSION['valid'])) {
-    header("Location: login.php");
+    header("Location: ../account/login.php");
     exit();
 }
 
-// Get user data
+// Get user data from database
 $user_id = $_SESSION['id'];
 $query = "SELECT * FROM users WHERE id = ?";
 $stmt = mysqli_prepare($con, $query);
@@ -17,11 +17,11 @@ mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 $user_data = mysqli_fetch_assoc($result);
 
-// Format creation date
+// Creation date
 $created_date = new DateTime($user_data['created_at']);
 $formatted_date = $created_date->format('F j, Y');
 
-// Handle profile picture upload
+// PFP upload
 if (isset($_FILES['profile_picture'])) {
     $file = $_FILES['profile_picture'];
     $allowed_types = ['image/jpeg', 'image/png', 'image/gif'];
@@ -36,7 +36,7 @@ if (isset($_FILES['profile_picture'])) {
         $target_path = $upload_dir . $filename;
 
         if (move_uploaded_file($file['tmp_name'], $target_path)) {
-            // Update database with new image path
+            // Idk man i can't store the image on database only can store path
             $update_query = "UPDATE users SET profile_picture = ? WHERE id = ?";
             $stmt = mysqli_prepare($con, $update_query);
             mysqli_stmt_bind_param($stmt, "si", $filename, $user_id);
@@ -51,7 +51,7 @@ if (isset($_FILES['profile_picture'])) {
     }
 }
 
-// Handle 2FA toggle
+// 2FA toggle
 if (isset($_POST['toggle_2fa'])) {
     $new_2fa_status = $_POST['2fa_status'] === '1' ? 1 : 0;
     $update_query = "UPDATE users SET has_2fa = ? WHERE id = ?";
@@ -67,7 +67,7 @@ if (isset($_POST['toggle_2fa'])) {
     }
 }
 
-// Handle profile information updates
+// updates profiles 
 if (isset($_POST['update_profile'])) {
     $new_email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
     $new_age = filter_var($_POST['age'], FILTER_SANITIZE_NUMBER_INT);
@@ -87,7 +87,7 @@ if (isset($_POST['update_profile'])) {
     }
 }
 
-// Handle password change
+// Updates password
 if (isset($_POST['change_password'])) {
     $current_password = $_POST['current_password'];
     $new_password = $_POST['new_password'];
@@ -114,17 +114,16 @@ if (isset($_POST['change_password'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile Settings - <?php echo htmlspecialchars($user_data['username']); ?></title>
-    <link rel="stylesheet" href="css/header.css">
-    <link rel="stylesheet" href="css/footer.css">
-    <link rel="stylesheet" href="css/profile.css">
-    <link rel="stylesheet" href="css/alogin.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../footer.css">
+    <link rel="stylesheet" href="../profile.css">
+    <link rel="stylesheet" href="../css/alogin.css">
 </head>
 
 <body>
-    <?php include("header.php"); ?>
+    <?php include("../header.php"); ?>
 
     <div class="profile-container">
-        <!-- Profile Sidebar -->
         <div class="profile-sidebar">
             <form id="profile-pic-form" method="post" enctype="multipart/form-data">
                 <div class="profile-picture">
@@ -140,9 +139,7 @@ if (isset($_POST['change_password'])) {
             </div>
         </div>
 
-        <!-- Settings Main Content -->
         <div class="settings-main">
-            <!-- Profile Information -->
             <div class="settings-section">
                 <h2 class="section-title">Profile Information</h2>
                 <form method="post">
@@ -158,11 +155,9 @@ if (isset($_POST['change_password'])) {
                 </form>
             </div>
 
-            <!-- Security Settings -->
             <div class="settings-section">
                 <h2 class="section-title">Security Settings</h2>
 
-                <!-- 2FA Toggle -->
                 <form method="post" class="toggle-switch" id="2faForm">
                     <label>Two-Factor Authentication</label>
                     <label class="toggle-btn">
@@ -178,7 +173,7 @@ if (isset($_POST['change_password'])) {
                         formData.append('toggle_2fa', '1');
                         formData.append('2fa_status', this.checked ? '1' : '0');
 
-                        fetch('profile.php', {
+                        fetch('../profile.php', {
                                 method: 'POST',
                                 body: formData
                             })
@@ -194,7 +189,6 @@ if (isset($_POST['change_password'])) {
                     });
                 </script>
 
-                <!-- Password Change -->
                 <form method="post" class="password-form">
                     <div class="field input">
                         <label>Current Password</label>
@@ -212,7 +206,6 @@ if (isset($_POST['change_password'])) {
                 </form>
             </div>
 
-            <!-- Notification Preferences -->
             <div class="settings-section">
                 <h2 class="section-title">Notification Preferences</h2>
                 <div class="notification-setting">
@@ -235,7 +228,6 @@ if (isset($_POST['change_password'])) {
                 </div>
             </div>
 
-            <!-- Privacy Settings -->
             <div class="settings-section">
                 <h2 class="section-title">Privacy Settings</h2>
                 <div class="notification-setting">
@@ -254,10 +246,10 @@ if (isset($_POST['change_password'])) {
         </div>
     </div>
 
-    <?php include("foot.php"); ?>
+    <?php include("../foot.php"); ?>
 
     <script>
-        // Handle profile picture upload
+        // Handle pfp upload
         document.getElementById('profile-pic-upload').addEventListener('change', function(e) {
             if (e.target.files && e.target.files[0]) {
                 const reader = new FileReader();

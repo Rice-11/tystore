@@ -11,22 +11,22 @@ $isLoggedIn = isset($_SESSION['valid']);
 $menuItems = [
     'profile' => [
         'title' => $isLoggedIn ? 'Account Settings' : 'Login',
-        'url' => $isLoggedIn ? 'profile.php' : 'login.php',
+        'url' => $isLoggedIn ? 'profile.php' : 'account/login.php',
         'icon' => 'settings.svg'
     ],
     'orders' => [
         'title' => 'Order History',
-        'url' => $isLoggedIn ? 'orders.php' : 'login.php',
+        'url' => $isLoggedIn ? 'orders.php' : 'account/login.php',
         'icon' => 'orders.svg'
     ],
     'membership' => [
         'title' => 'Membership Status',
-        'url' => $isLoggedIn ? 'membership.php' : 'login.php',
+        'url' => $isLoggedIn ? 'membership.php' : 'account/login.php',
         'icon' => 'membership.svg'
     ],
     'family' => [
         'title' => 'Family Management',
-        'url' => $isLoggedIn ? 'family.php' : 'login.php',
+        'url' => $isLoggedIn ? 'family.php' : 'account/login.php',
         'icon' => 'family.svg'
     ]
 ];
@@ -35,7 +35,7 @@ $menuItems = [
 if ($isLoggedIn) {
     $menuItems['logout'] = [
         'title' => 'Logout',
-        'url' => 'logout.php',
+        'url' => 'account/logout.php',
         'icon' => 'logout.svg'
     ];
 }

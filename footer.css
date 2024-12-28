@@ -108,3 +108,7 @@ footer {
     border-color: #007bff;
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
   }
+
+  .social {
+    padding: 24px 0px 0px 4px;
+  }
