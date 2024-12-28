@@ -6,7 +6,13 @@
     <title>Superlatyf</title>
     <link rel="stylesheet" href="css/astyle.css">
     <link rel="stylesheet" href="css/header.css">
-    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="footer.css">
+
+<style>
+    body{
+        background: #e4e9f7;
+    }
+</style>
 </head>
 <body>
     <?php include("header.php"); ?>

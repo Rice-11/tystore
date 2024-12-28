@@ -22,12 +22,12 @@ if(isset($_POST['submit'])) {
             $mail->isSMTP();
             $mail->Host = 'smtp.gmail.com';
             $mail->SMTPAuth = true;
-            $mail->Username = 'loltanehud92@gmail.com';
-            $mail->Password = 'ejsn ssoy ryuj sfcu';
+            $mail->Username = 'asigmtest@gmail.com';
+            $mail->Password = 'ppkn bijb qykr lgel';
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
             $mail->Port = 465;
             
-            $mail->setFrom('loltanehud92@gmail.com', 'Tystore');
+            $mail->setFrom('asigmtest@gmail.com', 'Toy Store');
             $mail->addAddress($email);
             
             $mail->isHTML(true);

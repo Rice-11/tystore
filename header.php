@@ -11,7 +11,7 @@ $isLoggedIn = isset($_SESSION['valid']);
 $menuItems = [
     'profile' => [
         'title' => $isLoggedIn ? 'Account Settings' : 'Login',
-        'url' => $isLoggedIn ? 'profile.php' : 'account/login.php',
+        'url' => $isLoggedIn ? 'account/profile.php' : 'account/login.php',
         'icon' => 'settings.svg'
     ],
     'orders' => [

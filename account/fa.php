@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'config.php';
+require_once '../config.php';
 
 $mode = isset($_GET['mode']) ? $_GET['mode'] : '2fa';
 $error_message = '';
@@ -43,7 +43,7 @@ if(isset($_POST['verify'])) {
         if($entered_code == $_SESSION['2fa_code']) {
             if(time() - $_SESSION['2fa_time'] <= 300) {
                 $role = $_SESSION['role'];
-                header("Location: " . ($role === 'admin' ? 'admin_dashboard.php' : 'index.php'));
+                header("Location: " . ($role === 'admin' ? '../admin_dashboard.php' : '../index.php'));
                 exit();
             } else {
                 $error_message = "Code has expired";
@@ -82,7 +82,7 @@ if(isset($_POST['reset_password'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Verification</title>
-    <link rel="stylesheet" href="css/alogin.css">
+    <link rel="stylesheet" href="../css/alogin.css">
 </head>
 <body>
     <div class="container">

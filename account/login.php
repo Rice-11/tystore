@@ -19,12 +19,12 @@
             $mail->isSMTP();
             $mail->Host = 'smtp.gmail.com';
             $mail->SMTPAuth = true;
-            $mail->Username = 'loltanehud92@gmail.com';
-            $mail->Password = 'ejsn ssoy ryuj sfcu';
+            $mail->Username = 'asigmtest@gmail.com';
+            $mail->Password = 'ppkn bijb qykr lgel';
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
             $mail->Port = 465;
             
-            $mail->setFrom('loltanehud92@gmail.com', 'Tystore');
+            $mail->setFrom('asigmtest@gmail.com', 'Toy Store');
             $mail->addAddress($email);
             
             $mail->isHTML(true);
@@ -69,7 +69,7 @@
                 $_SESSION['2fa_time'] = time();
                 
                 if(sendVerificationEmail($email, $code, '2FA Verification Code')) {
-                    header("Location: ../fa.php");
+                    header("Location: fa.php");
                     exit();
                 } else {
                     $error_message = "Error sending verification code";

@@ -127,7 +127,7 @@ if (isset($_POST['change_password'])) {
         <div class="profile-sidebar">
             <form id="profile-pic-form" method="post" enctype="multipart/form-data">
                 <div class="profile-picture">
-                    <img src="<?php echo $user_data['profile_picture'] ? 'uploads/profile_pictures/' . htmlspecialchars($user_data['profile_picture']) : 'images/default-avatar.png'; ?>"
+                    <img src="<?php echo $user_data['profile_picture'] ? '../uploads/profile_pictures/' . htmlspecialchars($user_data['profile_picture']) : '../accountimages/default-avatar.png'; ?>"
                         alt="Profile Picture" id="profile-pic">
                     <input type="file" name="profile_picture" id="profile-pic-upload" accept="image/*" style="display: none">
                 </div>
