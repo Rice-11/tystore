@@ -29,7 +29,7 @@ if(isset($_POST["submit"])){
             // Redirect to login page after 2 seconds
             echo "<script>
                     setTimeout(function() {
-                        window.location.href = '../account/login.php';
+                        window.location.href = 'login.php';
                     }, 2000);
                   </script>";
         } else {
@@ -118,7 +118,7 @@ if(isset($_POST["submit"])){
                     <input type="submit" class="btn" name="submit" value="Register" id="submitBtn" required>
                 </div>
                 <div class="links">
-                    Already a member? <a href="../account/login.php">Sign In</a>
+                    Already a member? <a href="login.php">Sign In</a>
                 </div>
             </form>
 

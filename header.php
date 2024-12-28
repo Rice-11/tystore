@@ -11,7 +11,7 @@ $isLoggedIn = isset($_SESSION['valid']);
 $menuItems = [
     'profile' => [
         'title' => $isLoggedIn ? 'Account Settings' : 'Login',
-        'url' => $isLoggedIn ? 'account/profile.php' : 'account/login.php',
+        'url' => $isLoggedIn ? 'profile.php' : 'account/login.php',
         'icon' => 'settings.svg'
     ],
     'orders' => [
@@ -42,6 +42,7 @@ if ($isLoggedIn) {
 ?>
 
 <header>
+    
     <a href="index.php">
         <div class="logo">
             <img src="images/logo.svg" alt="company_logo" width="50" height="50">

@@ -1,10 +1,10 @@
 <?php
 session_start();
-require_once '../config.php';
+require_once 'config.php';
 
 // Check for valid session if not it goes to login page
 if (!isset($_SESSION['valid'])) {
-    header("Location: ../account/login.php");
+    header("Location: login.php");
     exit();
 }
 
@@ -114,20 +114,20 @@ if (isset($_POST['change_password'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile Settings - <?php echo htmlspecialchars($user_data['username']); ?></title>
-    <link rel="stylesheet" href="../css/header.css">
-    <link rel="stylesheet" href="../footer.css">
-    <link rel="stylesheet" href="../profile.css">
-    <link rel="stylesheet" href="../css/alogin.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/profile.css">
+    <link rel="stylesheet" href="css/alogin.css">
 </head>
 
 <body>
-    <?php include("../header.php"); ?>
+    <?php include("header.php"); ?>
 
     <div class="profile-container">
         <div class="profile-sidebar">
             <form id="profile-pic-form" method="post" enctype="multipart/form-data">
                 <div class="profile-picture">
-                    <img src="<?php echo $user_data['profile_picture'] ? '../uploads/profile_pictures/' . htmlspecialchars($user_data['profile_picture']) : '../accountimages/default-avatar.png'; ?>"
+                    <img src="<?php echo $user_data['profile_picture'] ? 'uploads/profile_pictures/' . htmlspecialchars($user_data['profile_picture']) : 'images/default-avatar.png'; ?>"
                         alt="Profile Picture" id="profile-pic">
                     <input type="file" name="profile_picture" id="profile-pic-upload" accept="image/*" style="display: none">
                 </div>
@@ -173,7 +173,7 @@ if (isset($_POST['change_password'])) {
                         formData.append('toggle_2fa', '1');
                         formData.append('2fa_status', this.checked ? '1' : '0');
 
-                        fetch('../profile.php', {
+                        fetch('account/profile.php', {
                                 method: 'POST',
                                 body: formData
                             })
@@ -246,7 +246,7 @@ if (isset($_POST['change_password'])) {
         </div>
     </div>
 
-    <?php include("../foot.php"); ?>
+    <?php include("foot.php"); ?>
 
     <script>
         // Handle pfp upload

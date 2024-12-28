@@ -68,7 +68,7 @@ if(isset($_POST['reset_password'])) {
         unset($_SESSION['reset_email']);
         unset($_SESSION['reset_time']);
         
-        header("Location: account/login.php?message=Password updated successfully");
+        header("Location: login.php?message=Password updated successfully");
         exit();
     } else {
         $error_message = "Passwords do not match";

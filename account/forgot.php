@@ -35,7 +35,7 @@ if(isset($_POST['submit'])) {
             $mail->Body = "Your password reset code is: <b>$reset_code</b><br>This code will expire in 5 minutes.";
             
             $mail->send();
-            header("Location: ../account/verify_reset.php");
+            header("Location: verify_reset.php");
             exit();
         } catch (Exception $e) {
             $error_message = "Error sending reset code";
@@ -72,7 +72,7 @@ if(isset($_POST['submit'])) {
                     <input type="submit" class="btn" name="submit" value="Send Reset Code">
                 </div>
                 <div class="links">
-                    <a href="../account/login.php">Back to Login</a>
+                    <a href="login.php">Back to Login</a>
                 </div>
             </form>
         </div>

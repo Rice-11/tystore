@@ -9,7 +9,7 @@ if(isset($_POST['verify'])) {
     
     if($entered_code == $_SESSION['reset_code']) {
         if(time() - $_SESSION['reset_time'] <= 300) { // 5 minutes
-            header("Location: ../account/reset_password.php");
+            header("Location: reset_password.php");
             exit();
         } else {
             $error_message = "Code has expired";

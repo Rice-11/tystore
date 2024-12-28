@@ -6,7 +6,7 @@
     <title>Superlatyf</title>
     <link rel="stylesheet" href="css/astyle.css">
     <link rel="stylesheet" href="css/header.css">
-    <link rel="stylesheet" href="footer.css">
+    <link rel="stylesheet" href="css/footer.css">
 
 <style>
     body{
@@ -27,7 +27,7 @@
         <section>
             <p>THIS IS A LONG AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHHHHHHHHHHH</p>
         </section>
-        <a href="account/profile.php">does to the login page</a>
+        <a href="profile.php">does to the login page</a>
     </main>
 
     <?php include("foot.php"); ?>

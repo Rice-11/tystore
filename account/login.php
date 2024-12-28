@@ -138,9 +138,9 @@
                     <input type="submit" class="btn" name="submit" value="Login" required>
                 </div>
                 <div class="links">
-                    Don't have account? <a href="../account/register.php">Sign Up Now</a>
+                    Don't have account? <a href="register.php">Sign Up Now</a>
                     <br>
-                    <a href="../account/forgot.php">Forgot Password?</a>
+                    <a href="forgot.php">Forgot Password?</a>
                 </div>
             </form>
 

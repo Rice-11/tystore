@@ -5,7 +5,7 @@ require_once '../config.php';
 $error_message = '';
 
 if(!isset($_SESSION['reset_code']) || !isset($_SESSION['reset_email'])) {
-    header("Location: ../account/login.php");
+    header("Location: login.php");
     exit();
 }
 
@@ -21,7 +21,7 @@ if(isset($_POST['submit'])) {
         unset($_SESSION['reset_email']);
         unset($_SESSION['reset_time']);
         
-        header("Location: ../account/login.php?message=Password updated successfully");
+        header("Location: login.php?message=Password updated successfully");
         exit();
     } else {
         $error_message = "Passwords do not match";
